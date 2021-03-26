@@ -8,6 +8,13 @@ let wasDrawn = false;
 
 function update(){
     let numRects = +document.getElementById('num-rects').value;
+    if (numRects < 1){
+        numRects = 1;
+    }else if(numRects > 100){
+        numRects = 100;
+    }
+    numRects = Math.round(numRects);
+    document.getElementById('num-rects').value = numRects;
     let shape = document.getElementById('shape').value;
 
     let data = {
