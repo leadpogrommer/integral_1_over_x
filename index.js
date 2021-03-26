@@ -32,23 +32,24 @@ function update(){
         table.innerHTML += `<tr><th>N</th><th>x0</th><th>x1</th><th>f(x0)</th><th>f(x1)</th><th>S</th></tr>`;
     }
     let answer = 0;
+    let line = {width: 1};
     for(let i = 0; i < numRects; i++){
         let xl = (r-l)*i/numRects + l;
         let xr = (r-l)*(i+1)/numRects + l;
-        shapes.push({type: 'line', x0: xl, y0: 0, x1: xl, y1: f(xl)});
-        shapes.push({type: 'line', x0: xl, y0: 0, x1: xr, y1: 0});
+        shapes.push({type: 'line', x0: xl, y0: 0, x1: xl, y1: f(xl), line});
+        shapes.push({type: 'line', x0: xl, y0: 0, x1: xr, y1: 0, line});
         if(shape === 'rect'){
             let S = (xr-xl)*f(xl);
             answer += S;
             table.innerHTML += `<tr><td>${i+1}</td><td>${xl.toFixed(3)}</td><td>${(xr-xl).toFixed(3)}</td><td>${f(xl).toFixed(3)}</td><td>${S.toFixed(3)}</td></tr>`;
-            shapes.push({type: 'line', x0: xr, y0: 0, x1: xr, y1: f(xl)});
-            shapes.push({type: 'line', x0: xl, y0: f(xl), x1: xr, y1: f(xl)});
+            shapes.push({type: 'line', x0: xr, y0: 0, x1: xr, y1: f(xl), line});
+            shapes.push({type: 'line', x0: xl, y0: f(xl), x1: xr, y1: f(xl), line});
         }else {
             let S = (f(xl) + f(xr))* (xr-xl) / 2;
             table.innerHTML += `<tr><td>${i+1}</td><td>${xl.toFixed(3)}</td><td>${xr.toFixed(3)}</td><td>${f(xl).toFixed(3)}</td><td>${f(xr).toFixed(3)}</td><td>${S.toFixed(3)}</td></tr>`;
             answer += S;
-            shapes.push({type: 'line', x0: xr, y0: 0, x1: xr, y1: f(xr)});
-            shapes.push({type: 'line', x0: xl, y0: f(xl), x1: xr, y1: f(xr)});
+            shapes.push({type: 'line', x0: xr, y0: 0, x1: xr, y1: f(xr), line});
+            shapes.push({type: 'line', x0: xl, y0: f(xl), x1: xr, y1: f(xr), line});
         }
 
     }
